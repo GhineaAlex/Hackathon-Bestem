@@ -9,7 +9,7 @@ $GLOBAL_CONFIG [ 'USE_HTACCESS' ] = false ;
 $GLOBAL_CONFIG [ 'USE_HTTPS' ] = false ;
 $GLOBAL_CONFIG [ 'WEB_NAME' ] = 'BEST Hackathon' ;
 $GLOBAL_CONFIG [ 'HASH_KEY' ] = 'dasb12431' ;
-$GLOBAL_CONFIG [ 'CHAT_URL' ] = 'https://antsy.xyz:8080' ;
+$GLOBAL_CONFIG [ 'CHAT_URL' ] = 'http://antsy.xyz:8080' ;
 
 /* SETARILE BAZEI DE DATE */
 $GLOBAL_CONFIG [ 'DB_TYPE' ] = 'mysql' ;

@@ -10,7 +10,7 @@ class core {
 	static $query_string;
 	static $global_configs = array();
 	static $mysql_handle = null;
-	private $body;
+	static $body;
 
 	function __construct() {
 		self::__global_config();
@@ -18,7 +18,7 @@ class core {
 		$this->__connect_to_mysql();
 		self::__init_constants();
 		self::__url_string_query();
-		$this->body = $this->__get_body();
+		self::$body = $this->__get_body();
 		(new view())->__render(self::$query_string);
 	}
 
@@ -68,19 +68,25 @@ class core {
 
 	function __get_body() {
 		if ($_SERVER['REQUEST_METHOD'] === "GET") {
+			$return = array();
 			$body = array();
 			foreach($_GET as $key => $value) {
 				$body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
 			}
-			return $body;
+			$return[0] = 'GET';
+			array_push($return, $body);
+			return $return;
 		}
 
 		if ($_SERVER['REQUEST_METHOD'] == "POST") {
+			$return = array();
 			$body = array();
 			foreach($_POST as $key => $value) {
 				$body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
 			}
-			return $body;
+			$return[0] = 'POST';
+			array_push($return, $body);
+			return $return;
 		}
 	}
 

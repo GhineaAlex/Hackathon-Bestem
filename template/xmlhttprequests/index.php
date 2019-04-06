@@ -603,3 +603,28 @@ else if ( $configs [ 1 ] === 'paypal' ) {
     }
 
 }
+else if ( $configs [ 1 ] === 'get_trash' ) {
+	$result = DB::__db_query (
+		core::$mysql_handle ,
+		DB::$DB_FETCH_ALL ,
+		DB::$DB_PROTECTED ,
+		'SELECT * FROM `flags`'
+	) ;
+	echo json_encode($result);
+}
+else if ( $configs [ 1 ] == 'post_trash' ) {
+
+	if ( self::$_user_type == 0 ) exit ( 'Denied' ) ;
+	if ( empty ( $_POST ) ) exit ;
+	$lat = __F::__protected_string ( $_POST [ 'lat' ] ) ;
+	$lng = __F::__protected_string ( $_POST [ 'lng' ] ) ;
+
+	DB::__db_query (
+		core::$mysql_handle ,
+		DB::$DB_FETCH_NONE ,
+		DB::$DB_PROTECTED ,
+		'INSERT INTO `flags` (`lat`, `log`, `type`) VALUES (:lat, :log, \'1\')' ,
+		$lat,
+		$lng
+	) ;
+}

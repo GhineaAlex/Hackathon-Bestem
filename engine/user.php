@@ -57,5 +57,21 @@ class User extends view {
         return 1;
         
     }
+
+    static function add_friend($user_id) {
+        $me = view::$_user_information['ID'];
+        if (view::$_user_information['friends'] === 'null' || view::$_user_information['friends'] === '')
+            $array = array ();
+        else
+            $array = json_decode(view::$_user_information['friends']);
+
+
+        if (array_search($user_id, $array) === FALSE) {
+            array_push($array, $user_id);
+            $new_json = json_encode($array);
+            view::$_user_information['friends'] = $new_json;
+            DB::__db_query(core::$mysql_handle, DB::$DB_FETCH_NONE, DB::$DB_PROTECTED, 'UPDATE `accounts` SET `friends`=:fr WHERE `ID`=:steamid', $new_json, $me);
+        }
+    }
     
 }

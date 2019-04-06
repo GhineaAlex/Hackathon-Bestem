@@ -26,7 +26,7 @@
                                             <span class="input-group-btn">
                                                 <input type="submit" class="btn btn-primary" id="address" value="Save" />
                                             </span>
-                                        </div
+                                        </div>
                                     </li>
 
                                 
@@ -54,6 +54,18 @@
                             </div>
                         </div>
                     </div>
+                    <!-- IF ( {FRIEND} == 0 ) [friend] -->
+                    <form method="post">
+                        <input type="hidden" name="user_id" value="{ACCOUNT_INFORMATION}[ID]" />
+                        <input type="submit" name="submit" value="Add friend">
+                    </form>
+                    <!-- ELSE [friend] -->
+                        <!-- IF ( {FRIEND} == 3 ) [friend1] -->
+                            <h3 style="color: #fff;">You cannot be friend with yourself.</h3>
+                        <!-- ELSE [friend1] -->
+                            <h3 style="color: #fff;">You are already a friend.</h3>
+                        <!-- END_IF [friend1] -->
+                    <!-- END_IF [friend] -->
                 </div>
                 <div class="bs-callout bs-callout-danger" style="border: none ;">
                     <h3>Points history</h3>

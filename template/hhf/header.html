@@ -32,38 +32,31 @@
 		      		<a class="navbar-lef" href="{URL}"><img src="{REAL_URL}template/styles/images/logo250x250.png" id="logo" /></a>
 		    	</div>
 		    	<div class="collapse navbar-collapse" id="mobile_navbar">
-			      	<ul class="nav navbar-nav navbar-right">
+			      	<ul class="nav navbar-nav navbar-right" style="padding-top: 20px">
 
 			      		<li><a href="{URL}support">Support</a></li>
 
 			      		<!-- IF ( {USER_LOGGED} == 1 ) [logged] -->
-			        	<li id="earn_app"><a href="{URL}earn">Earn Points</a></li>
-			        	<li><a href="{URL}withdraw">Withdraw</a></li>
 			        	<li><a href="{URL}signout">Sign out</a></li>
 			        	<li class="userinfo">
 							<div class="inline-block"><a href="{URL}user/{USER_INFORMATION}[openid]"><img src="{USER_INFORMATION}[avatar_medium]" class="imageheader" /></a></div>
 							<div class="usertext inline-block">
 								<a style="padding: initial ;color: #000;" href="{URL}user/{USER_INFORMATION}[openid]">{USER_INFORMATION}[personaname]</a><br/>
+								<var>
+								<!-- IF ( {USER_INFORMATION}[coins] == 0 ) [coins_check] -->
+
+										No points
+								<!-- ELSE [coins_check] -->
+									{USER_INFORMATION}[coins] Points
+								<!-- END_IF [coins_check] -->
+								</var>
 							</div>
 						</li>
 			        	<!-- ELSE [logged] -->
-			        	<li class="userlogin">
-			        		<form action="{REAL_URL}internal/register_steam.php" method="post">
-								<input type="submit" id="steam_logon" name="submit" value="">
-							</form>
-
-			        	</li>
-
-						<li class="userlogin">
-							<form action="{REAL_URL}internal/register_google.php" method="post">
-								<input type="submit" id="google_logon" name="submit" value="">
-							</form>
-
-
-						</li>
 			        	<!-- END_IF [logged] -->
 			      	</ul>
 		    	</div>
 		  	</div>
 		</nav>
 		<div class="container-fluid text-center" style="padding: 0 ;margin: 0 ;min-height: calc(100% - 50px) ;" >
+			

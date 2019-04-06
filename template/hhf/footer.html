@@ -1,13 +1,28 @@
 
     	</div><!-- end .container -->
     	<div class="navbar footer" style="max-width: 100%">
+			<div style="padding-top: 10px ;" class="clear">
+				<div class="left">
+					<img style="padding-left: 10px ;" src="{REAL_URL}template/styles/images/footer.png"/>Antsy.xyz 2018. All rights reserved. This website is not affiliated with Valve Corporation.
+				</div>
+				<div class="right" style="float: right ;">
+					<a style="color: #fff ;" href="{URL}support">Terms of Service</a>
+					<a href="https://www.facebook.com/Antsyxyz-1853689841409736/">
+				    	<img class="special" src="{REAL_URL}template/styles/images/facebook.png" hspace="20" />
+				    </a>
 
+					<a href="https://www.instagram.com/antsy.xyz/">
+						<img class="special" src="{REAL_URL}template/styles/images/instagram.png" hspace= "5"/>
+					</a>
+				</div>
 			</div>
+    	</div>
     	<div id="response"></div>
     	<div id="withdraw_message"></div>
     	<!-- IF ( {USER_LOGGED} == 1 ) [check_login_chat] -->
-      <div id="chat_drop"></div>
-      <div id="chat_container"><iframe frameborder="0" style="height: 100% ;width: 100% ;" src="{CHAT_URL}/?user_id={USER_INFORMATION}[ID]&hash={USER_INFORMATION}[chat_session]"></iframe></div>
-      <!-- END_IF [check_login_chat] -->
-    </body>
+		<div id="chat_drop"></div>
+		<div id="chat_container"><iframe frameborder="0" style="height: 100% ;width: 100% ;" src="{CHAT_URL}/?user_id={USER_INFORMATION}[ID]&hash={USER_INFORMATION}[chat_session]"></iframe></div>
+
+		<!-- END_IF [check_login_chat] -->
+	</body>
 </html>

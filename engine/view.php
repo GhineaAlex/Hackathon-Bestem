@@ -72,7 +72,7 @@ class view {
             self::__check_for_variables($html_content);
             self::__check_for_foreach($html_content);
             self::__check_for_condition($html_content);
-            $html_content = str_replace(PHP_EOL, '', preg_replace('/(\>)\s*(\<)/m', '$1$2', $html_content));
+            //$html_content = str_replace(PHP_EOL, '', preg_replace('/(\>)\s*(\<)/m', '$1$2', $html_content));
             echo $html_content;
             return true;
         } else
@@ -218,4 +218,5 @@ class view {
         return $string;
         
     }
+
 }

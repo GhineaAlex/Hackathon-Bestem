@@ -1,7 +1,118 @@
-<div id="cover_page">
-  <form action="/site_new/" method="post">
-  First name: <input type="text" name="fname"><br>
-  Last name: <input type="text" name="lname"><br>
-  <input type="submit" value="Submit">
-</form>
-</div>
+
+<!-- IF ( {USER_LOGGED} == 0 ) [logged] -->
+	<form action="{REAL_URL}internal/register_steam.php" method="post">
+		<input type="submit" id="steam_logon" name="submit" value="">
+	</form>
+
+	<form action="{REAL_URL}internal/register_google.php" method="post">
+		<input type="submit" id="google_logon" name="submit" value="">
+	</form>
+
+
+<!-- END_IF [logged] -->
+
+<style>
+#map {
+  height: 400px;
+  width: 100%;
+}
+</style>
+<h3>My Google Maps Demo</h3>
+<div id="map"></div>
+<script>
+
+  function placeMarker(location, map) {
+    var marker = new google.maps.Marker({
+      position: location, 
+      map: map
+    });
+  }
+
+  var map, infoWindow;
+
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 44.451316599999995, lng: 27},
+      zoom: 15
+    });
+    infoWindow = new google.maps.InfoWindow;
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+    	navigator.geolocation.getCurrentPosition(function(position) {
+	        var pos = {
+	        	lat: position.coords.latitude,
+	            lng: position.coords.longitude
+	        };
+
+	        infoWindow.setPosition(pos);
+	        infoWindow.setContent('Location found.');
+	        infoWindow.open(map);
+        	map.setCenter(pos);
+        	
+
+        	$ . ajax ( {
+		        url: BOARD_AJAX + '/get_trash' ,
+		        beforeSend: function ( ) { } ,
+		        success: function ( get ) {
+		        	var trash = JSON.parse(get);
+
+		        	for (var i = 0; i < trash.length; i++){
+					    var obj = trash[i];
+					    placeMarker({lat: parseFloat(obj.lat), lng: parseFloat(obj.log)}, map);
+					}
+		        }
+		    } ) ;
+        	//TODO: load the locations
+
+        	map.addListener('click', function(e) {
+        		var r = confirm("Are you sure?");
+				if (r == true) {
+					// de editat
+					$.post ( BOARD_AJAX + '/post_trash' , { 'lng': appid , 'lat' : item_id } , function ( data ) {
+			            placeMarker(e.latLng, map);
+			        } ) ;
+				  
+				}
+    			
+  			});
+
+  			/*var markers = locations.map(function(location, i) {
+          		return new google.maps.Marker({
+            		position: location,
+            		label: "X"
+          		});
+        	});
+
+        	var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+			*/
+    	}, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+        	// Browser doesn't support Geolocation
+        	handleLocationError(false, infoWindow, map.getCenter());
+        }
+    }
+
+
+  
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    	infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+          'Eroare: Nu am putut gasi locatia ta' :
+          'Eroare: Browser-ul tau nu suporta Geolocatie');
+        infoWindow.open(map);
+      }
+
+    </script>
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+  -->
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYdMmXufdKcgsVpBeTFJvw0iX1OGhoMDA&callback=initMap">
+</script>
