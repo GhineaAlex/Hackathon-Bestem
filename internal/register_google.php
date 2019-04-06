@@ -44,7 +44,7 @@ if ( empty ( engine\session::get ( 'loggedin' ) ) ) {
                 $sth = null ;
                 
                 if ( $count == 0 ) {
-                    $sth = $handle -> prepare ( 'INSERT INTO `accounts` (`openid`, `provider`, `email`, `personaname`, `trade_link`, `profileurl`, `avatar`, `avatar_medium`, `avatar_full`, `cart`, `chat_session`, `referral_code`, `referral_ip`) VALUES (:openid, \'Google\', :email, :pers, \'\' , :url, :a, :am, :af, \'\' , \'\', :ref_c, \'\')' ) ;
+                    $sth = $handle -> prepare ( 'INSERT INTO `accounts` (`openid`, `provider`, `email`, `personaname`, `profileurl`, `avatar`, `avatar_medium`, `avatar_full`, `chat_session`) VALUES (:openid, \'Google\', :email, :pers, :url, :a, :am, :af, \'\')' ) ;
                     $sth -> execute ( array ( 
                         ':openid' => ''.$openid.'',
                         ':pers' => ( $gpUserProfile [ 'given_name' ] . ' ' . $gpUserProfile [ 'family_name' ] ) ,
@@ -52,8 +52,7 @@ if ( empty ( engine\session::get ( 'loggedin' ) ) ) {
                         ':url' => ( 'https://plus.google.com/u/0/' . $openid ) ,
                         ':a' => 'https://i.pinimg.com/originals/c9/b1/6e/c9b16eceedd12986cd5b762474103507.webp' ,
                         ':am' => 'https://i.pinimg.com/originals/c9/b1/6e/c9b16eceedd12986cd5b762474103507.webp' ,
-                        ':af' => 'https://i.pinimg.com/originals/c9/b1/6e/c9b16eceedd12986cd5b762474103507.webp' ,
-                        ':ref_c' => engine\Hash::create ( 'crc32' , '$' . $openid . '$' , $GLOBAL_CONFIG [ 'HASH_KEY' ] )
+                        ':af' => 'https://i.pinimg.com/originals/c9/b1/6e/c9b16eceedd12986cd5b762474103507.webp' 
 
                     ) ) ;
 					

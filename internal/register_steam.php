@@ -53,15 +53,14 @@ if ( empty ( engine\session::get ( 'loggedin' ) ) ) {
                     $sth = null ;
 
                     if ( $count == 0 ) {
-                        $sth = $handle -> prepare ( 'INSERT INTO `accounts` (`openid`, `provider`, `personaname`, `trade_link`, `profileurl`, `avatar`, `avatar_medium`, `avatar_full`, `cart`, `chat_session`, `referral_code`, `referral_ip`) VALUES (:openid, \'Steam\', :pers, \'\' , :url, :a, :am, :af, \'\' , \'\', :ref_c, \'\')' ) ;
+                        $sth = $handle -> prepare ( 'INSERT INTO `accounts` (`openid`, `provider`, `personaname`, `profileurl`, `avatar`, `avatar_medium`, `avatar_full`, `chat_session`) VALUES (:openid, \'Steam\', :pers , :url, :a, :am, :af, \'\')' ) ;
                         $sth -> execute ( array ( 
                             ':openid' => $steamid ,
                             ':pers' => $data -> personaname ,
                             ':url' => $data -> profileurl ,
                             ':a' => $data -> avatar ,
                             ':am' => $data -> avatarmedium ,
-                            ':af' => $data -> avatarfull ,
-                            ':ref_c' => engine\Hash::create ( 'crc32' , '$' . $steamid . '$' , $GLOBAL_CONFIG [ 'HASH_KEY' ] )
+                            ':af' => $data -> avatarfull
 
                         ) ) ;
                     }
