@@ -1,4 +1,4 @@
-<?php 
+<?php
 //error_reporting ( E_ALL ) ;
 define ( 'ALLOW' , true ) ;
 
@@ -7,5 +7,7 @@ spl_autoload_register ( function ( $object ) {
 } ) ;
 
 new engine\core ( ) ;
+
+
 
 exit ;
