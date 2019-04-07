@@ -618,13 +618,61 @@ else if ( $configs [ 1 ] == 'post_trash' ) {
 	if ( empty ( $_POST ) ) exit ;
 	$lat = __F::__protected_string ( $_POST [ 'lat' ] ) ;
 	$lng = __F::__protected_string ( $_POST [ 'lng' ] ) ;
+	$by = __F::__protected_string ( $_POST [ 'added' ] ) ;
+	$descr = __F::__protected_string ( $_POST [ 'descr' ] ) ;
+	$title = __F::__protected_string ( $_POST [ 'title' ] ) ;
 
 	DB::__db_query (
 		core::$mysql_handle ,
 		DB::$DB_FETCH_NONE ,
 		DB::$DB_PROTECTED ,
-		'INSERT INTO `flags` (`lat`, `log`, `type`) VALUES (:lat, :log, \'1\')' ,
+		'INSERT INTO `flags` (`lat`, `lng`, `title`, `description`, `type`, `added_by`) VALUES (:lat, :lng, :title, :descr, \'1\', :by)' ,
 		$lat,
-		$lng
+		$lng,
+        $title,
+        $descr,
+        $by
 	) ;
+}
+else if($configs [1] == 'create_trash') {
+    if ( self::$_user_type == 0 ) exit ( 'Denied' ) ;
+
+    $lat = __F::__protected_string ( $configs [ 2 ] ) ;
+    $lng = __F::__protected_string ( $configs [ 3 ] ) ;
+    $user = self::$_user_information['personaname'];
+    echo <<<HTML
+
+<form>
+  <div class="form-group">
+    <label for="id">Coordinates/Data:</label>
+    <input type="text" class="form-control" id="lat" value="$lat" readonly="readonly"><br>
+    <input type="text" class="form-control" id="lng" value="$lng" readonly="readonly"><br>
+    <input type="text" class="form-control" id="user" value="$user" readonly="readonly"><br>
+  </div>
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input type="text" class="form-control" id="title">
+  </div>
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <input type="text" class="form-control" id="description">
+  </div>
+  
+  <div id="sub" class="btn btn-default">Submit</div>
+</form>
+
+<script>
+$("#sub").click(function() {
+    
+    let title = $ ('#title').val();
+    let descr = $ ('#description').val();
+    
+    $.post(BOARD_AJAX + '/post_trash', {'lng': '$lng', 'lat': '$lat', 'added': '$user', 'title': title, 'descr': descr}, function (data) {
+        window . location . href = BOARD_URL;
+    });
+});
+</script>
+
+HTML;
+
 }

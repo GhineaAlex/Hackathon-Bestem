@@ -12,6 +12,9 @@ class core {
 	static $mysql_handle = null;
 	static $body;
 
+
+	public
+
 	function __construct() {
 		self::__global_config();
 		$this->__init_folders(self::$global_configs['ENGINE_FOLDER'], self::$global_configs['TEMPLATE_FOLDER'], self::$global_configs['OS_SEPARATOR']);

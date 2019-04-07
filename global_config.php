@@ -19,4 +19,4 @@ $GLOBAL_CONFIG [ 'DB_USER' ] = 'root' ;
 $GLOBAL_CONFIG [ 'DB_PASSWORD' ] = '' ;
 $GLOBAL_CONFIG [ 'VERSION' ] = '1.0' ;
 $GLOBAL_CONFIG [ 'API_KEY' ] = '1856B298BF464430A6BBDDFEC2D48705' ;
-$GLOBAL_CONFIG [ 'OPEN_URL' ] = 'http://localhost/site_new' ; 
+$GLOBAL_CONFIG [ 'OPEN_URL' ] = 'http://localhost' ;
